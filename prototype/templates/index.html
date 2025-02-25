@@ -3,49 +3,393 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Modern To-Do List</title>
-    <link rel="stylesheet" href="styles.css" />
+    <title>Cognolearn - AI-Powered Learning Platform</title>
+    <style>
+      /* Reset and Base Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: #efefd0;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      /* Typography */
+      h1,
+      h2,
+      h3 {
+        color: #004e89;
+        margin-bottom: 1rem;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+      }
+
+      h3 {
+        font-size: 1.3rem;
+      }
+
+      p {
+        margin-bottom: 1rem;
+      }
+
+      /* Buttons and Inputs */
+      button {
+        background-color: #ff6b35;
+        color: white;
+        border: none;
+        padding: 0.8rem 1.5rem;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #e5602e;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 1rem;
+        border: 2px solid #f7c59f;
+        border-radius: 5px;
+        font-size: 1rem;
+      }
+
+      input[type="text"]:focus {
+        outline: none;
+        border-color: #ff6b35;
+      }
+
+      /* Hero Section */
+      .hero {
+        background-color: #004e89;
+        color: white;
+        text-align: center;
+        padding: 3rem 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .hero h1 {
+        color: white;
+        margin-bottom: 1rem;
+        font-size: 3rem;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        max-width: 800px;
+        margin: 0 auto;
+        color: #f7c59f;
+      }
+
+      /* Layout */
+      .container {
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+        gap: 1.5rem;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 1rem;
+        min-height: calc(100vh - 250px);
+      }
+
+      /* Sidebar Panels */
+      .panel {
+        background-color: #1a659e;
+        border-radius: 10px;
+        padding: 1.5rem;
+        color: white;
+        height: 100%;
+      }
+
+      /* Left Sidebar - History Panel */
+      .history-panel h3 {
+        color: white;
+        border-bottom: 1px solid #f7c59f;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .history-item {
+        padding: 0.8rem;
+        margin-bottom: 0.8rem;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .history-item:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+
+      /* Center Section - Chat Area */
+      .chat-section {
+        display: flex;
+        flex-direction: column;
+        min-height: 70vh;
+      }
+
+      .chat-output {
+        flex-grow: 1;
+        background-color: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        overflow-y: auto;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .chat-input {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        background-color: white;
+        padding: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .input-icons {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .icon {
+        width: 24px;
+        height: 24px;
+        background-color: #f7c59f;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        padding: 5px;
+        transition: background-color 0.3s;
+      }
+
+      .icon:hover {
+        background-color: #ff6b35;
+      }
+
+      /* Right Sidebar - Tools Panel */
+      .tools-panel h3 {
+        color: white;
+        border-bottom: 1px solid #f7c59f;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .tool-button {
+        display: block;
+        width: 100%;
+        margin-bottom: 1rem;
+      }
+
+      /* Quiz and Notes Styles */
+      .quiz-card,
+      .note-card {
+        background-color: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .quiz-card h3,
+      .note-card h3 {
+        color: #004e89;
+        margin-bottom: 1rem;
+      }
+
+      .quiz-option {
+        display: block;
+        padding: 0.8rem;
+        margin-bottom: 0.8rem;
+        background-color: #efefd0;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .quiz-option:hover {
+        background-color: #f7c59f;
+      }
+
+      /* Footer */
+      footer {
+        background-color: #004e89;
+        color: white;
+        text-align: center;
+        padding: 1.5rem;
+        margin-top: 2rem;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 992px) {
+        .container {
+          grid-template-columns: 1fr 2fr;
+        }
+
+        .tools-panel {
+          display: none;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          grid-template-columns: 1fr;
+        }
+
+        .history-panel {
+          display: none;
+        }
+
+        .hero h1 {
+          font-size: 2.2rem;
+        }
+
+        .hero p {
+          font-size: 1rem;
+        }
+      }
+
+      /* For mobile menu */
+      .mobile-menu {
+        display: none;
+        background-color: #1a659e;
+        padding: 1rem;
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+
+      .mobile-menu button {
+        margin: 0 0.5rem;
+      }
+
+      @media (max-width: 992px) {
+        .mobile-menu {
+          display: block;
+        }
+      }
+
+      /* Icons for input area */
+      .mic-icon:before {
+        content: "🎤";
+      }
+
+      .upload-icon:before {
+        content: "📄";
+      }
+
+      .send-icon:before {
+        content: "➤";
+      }
+    </style>
   </head>
   <body>
-    <div class="container">
-      <h1>📝 Modern To-Do List</h1>
+    <!-- Hero Section -->
+    <header class="hero">
+      <h1>Cognolearn</h1>
+      <p>
+        Revolutionize your learning experience with AI-powered personalized
+        education
+      </p>
+    </header>
 
-      <form action="/add_task" method="post" class="task-form">
-        <input type="text" name="task" placeholder="Enter a task..." required />
-        <button type="submit">Add Task</button>
-      </form>
-
-      <ul class="task-list">
-        {% for task in tasks %}
-        <li class="task">
-          <input
-            type="checkbox"
-            onchange="toggleCompletion(this)"
-            {%
-            if
-            task.completed
-            %}checked{%
-            endif
-            %}
-          />
-          <span class="task-text {% if task.completed %}completed{% endif %}"
-            >{{ task.content }}</span
-          >
-          <a
-            href="{{ url_for('delete_task', task_id=task.id) }}"
-            class="delete-btn"
-            >×</a
-          >
-        </li>
-        {% endfor %}
-      </ul>
+    <!-- Mobile Menu (only visible on smaller screens) -->
+    <div class="mobile-menu">
+      <button>History</button>
+      <button>Tools</button>
     </div>
 
-    <script>
-      function toggleCompletion(checkbox) {
-        let taskText = checkbox.nextElementSibling;
-        taskText.classList.toggle("completed", checkbox.checked);
-      }
-    </script>
+    <!-- Main Layout -->
+    <div class="container">
+      <!-- Left Sidebar - History Panel -->
+      <aside class="panel history-panel">
+        <h3>Learning History</h3>
+        <div class="history-item">Introduction to Machine Learning</div>
+        <div class="history-item">Python Basics Quiz</div>
+        <div class="history-item">Data Science Notes</div>
+        <div class="history-item">Web Development Fundamentals</div>
+        <div class="history-item">JavaScript Syntax Review</div>
+      </aside>
+
+      <!-- Center Section - Chat Area -->
+      <main class="chat-section">
+        <div class="chat-output">
+          <!-- Sample Quiz -->
+          <div class="quiz-card">
+            <h3>Python Basics Quiz</h3>
+            <p>
+              Question 1: Which of the following is used to define a function in
+              Python?
+            </p>
+            <div class="quiz-option">A) function</div>
+            <div class="quiz-option">B) def</div>
+            <div class="quiz-option">C) define</div>
+            <div class="quiz-option">D) func</div>
+          </div>
+
+          <!-- Sample Note -->
+          <div class="note-card">
+            <h3>Key Points: Machine Learning Basics</h3>
+            <p>
+              Machine learning is a subset of artificial intelligence that
+              focuses on building systems that learn from data. Here are some
+              key concepts:
+            </p>
+            <ul>
+              <li>Supervised Learning: Training with labeled data</li>
+              <li>Unsupervised Learning: Finding patterns in unlabeled data</li>
+              <li>Reinforcement Learning: Learning through trial and error</li>
+              <li>Deep Learning: Using neural networks with multiple layers</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="chat-input">
+          <input
+            type="text"
+            placeholder="Ask a question or enter a topic to study..."
+          />
+          <div class="input-icons">
+            <div class="icon mic-icon"></div>
+            <div class="icon upload-icon"></div>
+          </div>
+          <button>
+            <span class="send-icon"></span>
+          </button>
+        </div>
+      </main>
+
+      <!-- Right Sidebar - Tools Panel -->
+      <aside class="panel tools-panel">
+        <h3>Productivity Tools</h3>
+        <button class="tool-button">To-Do List</button>
+        <button class="tool-button">Analytics</button>
+        <button class="tool-button">Study Timer</button>
+        <button class="tool-button">Flashcards</button>
+        <button class="tool-button">Notes</button>
+      </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2025 Cognolearn. All rights reserved.</p>
+    </footer>
   </body>
 </html>
