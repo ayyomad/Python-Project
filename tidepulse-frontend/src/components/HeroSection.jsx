@@ -21,12 +21,12 @@ const HeroSection = () => {
         {/* Buttons */}
         <div className="mt-8 flex justify-start space-x-6">
           <button
-            className="bg-blue-500 text-white px-8 py-3 rounded-2xl text-lg font-semibold shadow-md hover:bg-blue-600 transition"
+            className="bg-blue-500 text-white px-10 py-4 rounded-full text-lg font-semibold shadow-lg hover:bg-blue-600 transition-transform transform hover:scale-105"
             onClick={scrollToForecast}
           >
             Forecast
           </button>
-          <button className="border-2 border-blue-500 text-blue-500 px-8 py-3 rounded-2xl text-lg font-semibold hover:bg-blue-100 transition">
+          <button className="border-2 border-blue-500 text-blue-500 px-10 py-4 rounded-full text-lg font-semibold hover:bg-blue-100 transition-transform transform hover:scale-105">
             Community
           </button>
         </div>
