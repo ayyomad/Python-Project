@@ -1,14 +1,22 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import HeroSection from './components/HeroSection';
+import ForecastSection from './components/ForecastSection';
+import LoginPage from './components/LoginPage';
 
-function App() {
+const App = () => {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-      </Routes>
+      <div>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<><HeroSection /><ForecastSection /></>} />
+          <Route path="/login" element={<LoginPage />} />
+        </Routes>
+      </div>
     </Router>
   );
-}
+};
 
 export default App;
