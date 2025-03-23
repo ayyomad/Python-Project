@@ -1,28 +1,26 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import HeroSection from './components/HeroSection';
-import ForecastSection from './components/ForecastSection';
-import CommunityEngagement from './components/CommunityEngagement'; // Import the new section
+import Home from './pages/Home'; // Import Home page
 import LoginPage from './components/LoginPage';
+import CommunityPage from './components/CommunityPage'; // Import Community page
+import SafetyResourcesPage from './components/SafetyResourcesPage'; // Import Safety & Resources page
 
 const App = () => {
   return (
     <Router>
       <div>
-        <Navbar />
         <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <HeroSection />
-                <ForecastSection />
-                <CommunityEngagement /> {/* Add the Community Engagement Section */}
-              </>
-            }
-          />
+          {/* Home Route */}
+          <Route path="/" element={<Home />} />
+
+          {/* Login Route */}
           <Route path="/login" element={<LoginPage />} />
+
+          {/* Community Route */}
+          <Route path="/community" element={<CommunityPage />} />
+
+          {/* Safety & Resources Route */}
+          <Route path="/safety-resources" element={<SafetyResourcesPage />} />
         </Routes>
       </div>
     </Router>
