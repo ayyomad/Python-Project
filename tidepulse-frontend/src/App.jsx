@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar'; // Import Navbar
 import Home from './pages/Home'; // Import Home page
 import LoginPage from './components/LoginPage';
 import CommunityPage from './components/CommunityPage'; // Import Community page
@@ -8,18 +9,15 @@ import SafetyResourcesPage from './components/SafetyResourcesPage'; // Import Sa
 const App = () => {
   return (
     <Router>
-      <div>
+      <div className="relative min-h-screen">
+        {/* Navbar is now globally rendered */}
+        <Navbar />
+
+        {/* Routes */}
         <Routes>
-          {/* Home Route */}
           <Route path="/" element={<Home />} />
-
-          {/* Login Route */}
           <Route path="/login" element={<LoginPage />} />
-
-          {/* Community Route */}
           <Route path="/community" element={<CommunityPage />} />
-
-          {/* Safety & Resources Route */}
           <Route path="/safety-resources" element={<SafetyResourcesPage />} />
         </Routes>
       </div>
